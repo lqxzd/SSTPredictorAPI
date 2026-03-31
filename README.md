@@ -85,16 +85,17 @@ python app.py
 
 以下是本项目提供的主要 API 接口概览：
 
-| 模块 | 请求方法 | 路由 (完整路径)                   | 描述                   | 权限/备注                                           |
-| ---- | -------- | --------------------------------- | ---------------------- | --------------------------------------------------- |
-| 认证 | POST     | `/api/auth/register`              | 普通用户注册           | 无 (默认角色为 USER)                                |
-| 认证 | POST     | `/api/auth/register_admin`        | 特权注册 (管理员/超管) | 需填写有效的 `license_key`                          |
-| 认证 | POST     | `/api/auth/login`                 | 用户登录               | 无 (返回 JWT Token 及权限列表)                      |
-| 管理 | GET      | `/api/admin/users`                | 获取用户列表           | 需 `user:manage` 权限 (普通管理员无法看到超管)      |
-| 管理 | POST     | `/api/admin/upgrade-user`         | 升级普通用户权限       | 需 `user:upgrade` 权限 (仅限升级为 USER 或 PREMIUM) |
-| 管理 | POST     | `/api/admin/promote-to-admin`     | 提拔为管理员/超管      | 需 `admin:promote` 权限 (仅限 SUPER_ADMIN 使用)     |
-| 公共 | GET      | `/api/public/history/point`       | 查询单点单日历史温度   | 无 (需参数: lat, lon, date)                         |
-| 公共 | GET      | `/api/public/history/point/range` | 查询单点日期范围温度   | 无 (需参数: lat, lon, start, end)                   |
-| 公共 | GET      | `/api/public/history/region`      | 查询区域单日温度快照   | 无 (用于热力图，需经纬度范围及日期)                 |
+| 模块 | 请求方法 | 路由 (完整路径)                   | 描述                   | 权限/备注                                                    |
+| ---- | -------- | --------------------------------- | ---------------------- | ------------------------------------------------------------ |
+| 认证 | POST     | `/api/auth/register`              | 普通用户注册           | 无 (默认角色为 USER)                                         |
+| 认证 | POST     | `/api/auth/register_admin`        | 特权注册 (管理员/超管) | 需填写有效的 `license_key`                                   |
+| 认证 | POST     | `/api/auth/login`                 | 用户登录               | 无 (返回 JWT Token 及权限列表)                               |
+| 管理 | GET      | `/api/admin/users`                | 获取用户列表           | 需 `user:manage` 权限 (普通管理员无法看到超管)               |
+| 管理 | POST     | `/api/admin/upgrade-user`         | 升级普通用户权限       | 需 `user:upgrade` 权限 (仅限升级为 USER 或 PREMIUM)          |
+| 管理 | POST     | `/api/admin/promote-to-admin`     | 提拔为管理员/超管      | 需 `admin:promote` 权限 (仅限 SUPER_ADMIN 使用)              |
+| 公共 | GET      | `/api/public/history/point`       | 查询单点单日历史温度   | 无 (需参数: lat, lon, date)                                  |
+| 公共 | GET      | `/api/public/history/point/range` | 查询单点日期范围温度   | 无 (需参数: lat, lon, start, end)                            |
+| 公共 | GET      | `/api/public/history/region`      | 查询区域单日温度快照   | 无 (用于热力图，需经纬度范围及日期)                          |
+| 认证 | POST     | `/api/predict/point`              | 单点预测温度           | 需有效的用户token，参数：lat, lon, start_date, day(预测天数) |
 
 > **注意**: 具体的请求参数和响应格式，请参考 API 文档或使用 Postman 等工具进行测试。
