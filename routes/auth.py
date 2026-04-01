@@ -83,24 +83,28 @@ def login():
     password = data.get('password')
     
     user = User.query.filter_by(username=username).first()
-    user_identity = str(user.id)
+
+    
     
     # 使用模型自带的方法验证密码
     if not user or not user.check_password(password):
         return jsonify(msg="用户名或密码错误"), 401
+    
+    user_identity = str(user.id)
         
     # 生成 JWT Token
     access_token = create_access_token(identity=user_identity, additional_claims={"role": user.role})
     
     # 计算用户的权限列表返回给前端
     permissions = Config.PERMISSIONS_MAP.get(user.role, [])
+    user_routes = Config.ROUTE_MAP.get(user.role, [])
     
     return jsonify({
         "token": access_token,
         "user_info": {
             "id": user.id,
             "username": user.username,
-            "role": user.role,
-            "permissions": permissions
+            "email": user.email,
+            "routes": user_routes
         }
     }), 200

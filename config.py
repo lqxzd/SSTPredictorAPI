@@ -60,3 +60,35 @@ class Config:
     # 用于特权注册
     ADMIN_LICENSE_KEY = "admin_pass_123"
     SUPER_ADMIN_LICENSE_KEY = "super_admin_pass_456"
+
+
+
+    # --- 前端路由/菜单配置 ---
+    # 定义每个角色可见的路由和菜单结构
+    # 这里的结构可以直接对应前端 Vue Router 或 ElementUI Menu 的结构
+    ROUTE_MAP = {
+        'SUPER_ADMIN': [
+            {'path': '/dashboard', 'name': '仪表盘', 'icon': 'DataAnalysis'},
+            {'path': '/predict/point', 'name': '单点预测', 'icon': 'MapLocation'},
+            {'path': '/predict/area', 'name': '区域预测', 'icon': 'Odometer'},
+            {'path': '/system/users', 'name': '用户管理', 'icon': 'User'},
+            {'path': '/system/logs', 'name': '系统日志', 'icon': 'Document'}
+        ],
+        'ADMIN': [
+            {'path': '/dashboard', 'name': '仪表盘', 'icon': 'DataAnalysis'},
+            {'path': '/predict/point', 'name': '单点预测', 'icon': 'MapLocation'},
+            {'path': '/predict/area', 'name': '区域预测', 'icon': 'Odometer'},
+            {'path': '/system/users', 'name': '用户管理', 'icon': 'User'}
+            # 注意：管理员看不到系统日志
+        ],
+        'PREMIUM': [
+            {'path': '/dashboard', 'name': '仪表盘', 'icon': 'DataAnalysis'},
+            {'path': '/predict/point', 'name': '单点预测', 'icon': 'MapLocation'},
+            {'path': '/predict/area', 'name': '区域预测', 'icon': 'Odometer'}
+        ],
+        'USER': [
+            {'path': '/dashboard', 'name': '仪表盘', 'icon': 'DataAnalysis'},
+            {'path': '/predict/point', 'name': '单点预测', 'icon': 'MapLocation'}
+            # 普通用户只能看点预测，看不到区域预测
+        ]
+    }
